@@ -1,0 +1,57 @@
+/* ----
+----------- Fonts
+---- */
+@font-face {
+    font-family: 'JosefinSlab';
+    src: url( './fonts/JosefinSlab-Regular.ttf' ) format( 'truetype' );
+}
+
+
+/* ----
+----------- Global
+---- */
+
+html, body { background-color: #fafafa }
+
+.main-wrapper {
+    min-height: 100vh;
+    overflow-x: hidden !important;
+}
+
+
+/* ----
+----------- Header
+---- */
+#header { background-color:#FFF; }
+#site_logo { font-family: JosefinSlab, serif; }
+
+
+/* ----
+----------- Content
+---- */
+#content {}
+
+#content textarea {
+    height:300px;
+    resize: none !important;
+    border:none !important;
+    outline:none!important;
+    border-radius:5px;
+    box-shadow: 0px 15px 25px -10px rgba(0,0,0,0.25);
+    transition:0.3s;
+}
+
+#content textarea:hover { box-shadow: 0px 15px 25px -10px rgba(0,0,0,0.3); }
+#content textarea:focus { box-shadow: 0px 15px 25px -10px rgba(0,0,0,0.5); }
+
+
+/* ----
+----------- Results
+---- */
+#results {}
+
+
+/* ----
+----------- Footer
+---- */
+#footer {}
