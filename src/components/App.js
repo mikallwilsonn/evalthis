@@ -21,7 +21,7 @@ class App extends Component {
                 <Header />
 
                 <div className="container-fluid">
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center pt-5 pb-5">
                         <div className="row justify-content-between col-8">
                             <Content />
                             <Results />
@@ -39,4 +39,4 @@ class App extends Component {
 
 // ----
 // Export
-export default App;
+export default  App;
