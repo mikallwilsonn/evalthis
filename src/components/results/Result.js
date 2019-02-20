@@ -9,7 +9,7 @@ class Result extends Component {
     render() {
         const { title, value } = this.props;
         return (
-            <div className="result container-fluid row justify-content-between align-items-center p-2 m-0">
+            <div className="result container-fluid row justify-content-between align-items-center p-3 m-0">
                 <div className="result_title col-8 p-0 text-left">
                     {title}
                 </div>

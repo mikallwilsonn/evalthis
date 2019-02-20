@@ -2,9 +2,8 @@
 // Evaluate
 export const evaluate = ( content ) => dispatch => {
 
-    let words;
-    let sentences;
-    let paragraphs;
+    let words, sentences, paragraphs, q, s, e, p;
+
     if ( content.length === 0 ) {
         content = '';
         words = 0;
@@ -12,8 +11,15 @@ export const evaluate = ( content ) => dispatch => {
         paragraphs = 0;
     } else {
         words = content.split(' ').length - 1;
-        sentences = content.split(/\s*(?:;|$)\s*/).length;
-        paragraphs = content.split('\n').length;
+
+        q = content.split( '?' ).length - 1;
+        s = content.split( ';' ).length - 1;
+        e = content.split( '!' ).length - 1;
+        p = content.split( '.' ).length - 1;
+        sentences = q + s + e + p;
+
+        paragraphs = content.replace(/\n$/gm, '').split(/\n/).length;
+        
     }
 
 
@@ -35,7 +41,7 @@ export const evaluate = ( content ) => dispatch => {
             limit: null
         },
         puncuation: {
-            label: 'Puncuation',
+            label: 'Puncuation & Symbols',
             length: content.replace(/[^.,?!@#$%^&*()"' ]/g, "").length,
             limit: null
         },
@@ -53,7 +59,34 @@ export const evaluate = ( content ) => dispatch => {
             label: 'Paragraphs',
             length: paragraphs,
             limit: null
+        },
+        facebook: {
+            label: 'Facebook',
+            length: content.length,
+            limit: 60000
+        },
+        twitter: {
+            label: 'Twitter',
+            length: content.length,
+            limit: 280
+        },
+        linkedin: {
+            label: 'LinkedIn',
+            length: content.length,
+            limit: 600
+        },
+        google: {
+            label: 'Google+',
+            length: content.length,
+            limit: 300
+        },
+        instagram: {
+            label: 'Instagram',
+            length: content.length,
+            limit: 2200
         }
+
+
     }
 
     dispatch({ type: 'evaluate', payload: results });
