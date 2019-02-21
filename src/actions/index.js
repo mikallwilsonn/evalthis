@@ -22,8 +22,6 @@ export const evaluate = ( content ) => dispatch => {
         
     }
 
-
-
     const results = {
         characters: {
             label: 'Characters',
@@ -90,4 +88,60 @@ export const evaluate = ( content ) => dispatch => {
     }
 
     dispatch({ type: 'evaluate', payload: results });
+}
+
+
+// ----
+// Randomize
+export const randomize = ( value ) => dispatch => {
+
+    value = value.split( "" );
+    value = randomizer( value );
+    
+    function randomizer( array ) {
+        let currentIndex = array.length, tempValue, randomIndex;
+    
+        while ( 0 !== currentIndex ) {
+            randomIndex = Math.floor( Math.random() * currentIndex );
+            currentIndex -= 1;
+            tempValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = tempValue;
+        }
+        return array;
+    }
+
+    const results = value.join("");
+    dispatch({ type: 'randomize', payload: results });
+}
+
+
+// ----
+// All Uppercase
+export const allUppercase = ( value ) => dispatch => {
+    const results = value.toUpperCase();
+    dispatch({ type: 'uppercase', payload: results });
+}
+
+
+// ----
+// All Lowercase
+export const allLowercase = ( value ) => dispatch => {
+    const results = value.toLowerCase();
+    dispatch({ type: 'lowercase', payload: results });
+}
+
+
+// ----
+// Reverse
+export const allReverse = ( value ) => dispatch => {
+    const results = value.split( "" ).reverse().join( "" );
+    dispatch({ type: 'reverse', payload: results });
+}
+
+
+// ----
+// Original
+export const original = ( value ) => dispatch => {
+    dispatch({ type: 'original', payload: value });
 }

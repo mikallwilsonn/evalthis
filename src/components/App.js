@@ -16,13 +16,13 @@ import Footer from './Footer';
 class App extends Component {
     render() {
         return (
-            <div className="main-wrapper container-fluid d-flex flex-column justify-content-between m-0 p-0">
+            <div className="main-wrapper col-sm-12 d-flex flex-column justify-content-between m-0 p-0">
 
                 <Header />
 
-                <div className="container-fluid">
+                <div className="col-sm-12">
                     <div className="row justify-content-center pt-5 pb-5">
-                        <div className="row justify-content-between col-8">
+                        <div className="row justify-content-between col-sm-8">
                             <Content />
                             <Results />
                         </div>
