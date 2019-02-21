@@ -29,16 +29,13 @@ class Results extends Component {
         }
 
         return(
-            <div id="results" className="col-4 bg-white p-3 m-0">
+            <div id="results" className="col-lg-4 bg-white p-3 m-0">
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item">
                         <a className="nav-link active" id="results-tab" data-toggle="tab" href="#results-show" role="tab" aria-controls="results" aria-selected="true">Results</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" id="social-tab" data-toggle="tab" href="#social" role="tab" aria-controls="social" aria-selected="false">Social</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" id="keywords-tab" data-toggle="tab" href="#keywords" role="tab" aria-controls="keywords" aria-selected="false">Key Words</a>
                     </li>
                 </ul>
                 <div className="tab-content p-3" id="myTabContent">
@@ -80,7 +77,6 @@ class Results extends Component {
                             limit={results.instagram.limit}
                         />
                     </div>
-                    <div className="tab-pane fade" id="keywords" role="tabpanel" aria-labelledby="keywords-tab">Coming Soon!</div>
                 </div>
 
             </div>
