@@ -138,10 +138,3 @@ export const allReverse = ( value ) => dispatch => {
     const results = value.split( "" ).reverse().join( "" );
     dispatch({ type: 'reverse', payload: results });
 }
-
-
-// ----
-// Original
-export const original = ( value ) => dispatch => {
-    dispatch({ type: 'original', payload: value });
-}
