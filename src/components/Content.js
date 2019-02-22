@@ -16,44 +16,69 @@ class Content extends Component {
 
     constructor( state ) {
         super( state );
-        state = { originalValue: '' }
-        this.contentRef = createRef();
-    }
-
-    componentDidUpdate() {
-        if ( this.props.inputValue.length > 0 ) {
-            this.contentRef.current.value = this.props.inputValue;
+        this.state = { 
+            originalValue: '',
+            originalIsSet: false 
         }
+        this.contentRef = createRef();
     }
 
     isTyping( value ) {
         this.props.evaluate( value );
-        this.setState({ originalValue: value })
+        if ( this.state.originalIsSet === false ) {
+            this.setState({ originalValue: value });
+        }
     }
 
     clear() {
         this.contentRef.current.value = '';
         this.props.evaluate( '' );
+        this.setState({ 
+            originalValue: '', 
+            inputValue: '',
+            originalIsSet: false
+        });
     }
 
     onRandomize() {
+        this.setOriginal();
         this.props.randomize( this.contentRef.current.value );
+        this.setInputValue();
     }
 
     onAllLowercase() {
+        this.setOriginal();
         this.props.allLowercase( this.contentRef.current.value );
+        this.setInputValue();
     }
 
     onAllUpercase() {
+        this.setOriginal();
         this.props.allUppercase( this.contentRef.current.value );
+        this.setInputValue();
     }
 
     onReverse() {
+        this.setOriginal();
         this.props.allReverse( this.contentRef.current.value );
+        this.setInputValue();
     }
 
     onOriginal() {
+        this.setOriginal();
         this.props.original( this.state.originalValue );
+        this.setInputValue();
+    }
+
+    setInputValue() {
+        console.log( this.props.inputValue );
+        this.contentRef.current.value = this.props.inputValue;
+    }
+
+    setOriginal() {
+        if ( this.state.originalIsSet === false ) {
+            this.setState({ originalIsSet: true });
+        }
     }
 
     render() {
@@ -76,27 +101,27 @@ class Content extends Component {
                     </button> 
                     <div className="dropdown-menu">
                         <button 
-                            className="btn btn-block text-muted"
+                            className="btn btn-block text-dark"
                             onClick={() => this.onReverse()}>
                             <Icon icon={faBackward} size="sm" /> Reverse
                         </button>
                         <button 
-                            className="btn btn-block text-muted"
+                            className="btn btn-block text-dark"
                             onClick={() => this.onAllLowercase()}>
                             <Icon icon={faSortAlphaDown} size="sm" /> All Lowercase
                         </button>
                         <button 
-                            className="btn btn-block text-muted"
+                            className="btn btn-block text-dark"
                             onClick={() => this.onAllUpercase()}>
                             <Icon icon={faSortAlphaUp} size="sm" /> All Uppercase
                         </button>
                         <button 
-                            className="btn btn-block text-muted"
+                            className="btn btn-block text-dark"
                             onClick={() => this.onRandomize()}>
                             <Icon icon={faRandom} size="sm" /> Randomize
                         </button>
                         <button 
-                            className="btn btn-block text-muted"
+                            className="btn btn-block text-dark"
                             onClick={() => this.onOriginal()}>
                             <Icon icon={faUndo} size="sm" /> Original
                         </button>
@@ -115,6 +140,8 @@ class Content extends Component {
 }
 
 
+// ----
+// Map State To Props
 function mapStateToProps({ inputValue }) {
     return { inputValue };
 }
