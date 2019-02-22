@@ -22,7 +22,7 @@ class App extends Component {
 
                 <div className="col-sm-12">
                     <div className="row justify-content-center pt-5 pb-5">
-                        <div className="row justify-content-between col-sm-8">
+                        <div className="row justify-content-between col-md-8">
                             <Content />
                             <Results />
                         </div>

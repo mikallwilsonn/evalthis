@@ -6,7 +6,7 @@ import * as actions from '../actions';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { 
     faEraser, faEllipsisH, faRandom, faSortAlphaUp, 
-    faSortAlphaDown, faBackward, faUndo 
+    faSortAlphaDown, faBackward, faTimes 
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -16,68 +16,43 @@ class Content extends Component {
 
     constructor( state ) {
         super( state );
-        this.state = { 
-            originalValue: '',
-            originalIsSet: false 
-        }
         this.contentRef = createRef();
+        this.modifiedContainerRef = createRef();
+        this.modifiedResultsRef = createRef();
     }
 
     isTyping( value ) {
         this.props.evaluate( value );
-        if ( this.state.originalIsSet === false ) {
-            this.setState({ originalValue: value });
-        }
     }
 
     clear() {
         this.contentRef.current.value = '';
         this.props.evaluate( '' );
-        this.setState({ 
-            originalValue: '', 
-            inputValue: '',
-            originalIsSet: false
-        });
+        this.modifiedContainerRef.current.style.display ="none";
     }
 
     onRandomize() {
-        this.setOriginal();
         this.props.randomize( this.contentRef.current.value );
-        this.setInputValue();
     }
 
     onAllLowercase() {
-        this.setOriginal();
         this.props.allLowercase( this.contentRef.current.value );
-        this.setInputValue();
     }
 
     onAllUpercase() {
-        this.setOriginal();
         this.props.allUppercase( this.contentRef.current.value );
-        this.setInputValue();
     }
 
     onReverse() {
-        this.setOriginal();
         this.props.allReverse( this.contentRef.current.value );
-        this.setInputValue();
     }
 
-    onOriginal() {
-        this.setOriginal();
-        this.props.original( this.state.originalValue );
-        this.setInputValue();
-    }
 
-    setInputValue() {
-        console.log( this.props.inputValue );
-        this.contentRef.current.value = this.props.inputValue;
-    }
-
-    setOriginal() {
-        if ( this.state.originalIsSet === false ) {
-            this.setState({ originalIsSet: true });
+    componentDidUpdate() {
+        const { modified } = this.props;
+        if ( modified ) {
+            this.modifiedContainerRef.current.style = { display: 'block !important' };
+            this.modifiedResultsRef.current.innerHTML = modified;
         }
     }
 
@@ -120,17 +95,38 @@ class Content extends Component {
                             onClick={() => this.onRandomize()}>
                             <Icon icon={faRandom} size="sm" /> Randomize
                         </button>
-                        <button 
-                            className="btn btn-block text-dark"
-                            onClick={() => this.onOriginal()}>
-                            <Icon icon={faUndo} size="sm" /> Original
-                        </button>
                         <div className="dropdown-divider"></div>
                         <button 
                             className="btn btn-block text-danger"
                             onClick={() => this.clear()}>
                             <Icon icon={faEraser} size="sm" /> Clear
                         </button>
+                    </div>
+                </div>
+
+                <div 
+                    id="modified_results"
+                    className="bg-white text-muted col-lg-12 p-3"
+                    style={{ display: 'none' }}
+                    ref={this.modifiedContainerRef}
+                >
+                    <div className="row col-lg-12 justify-content-space-between align-items-center text-left">
+                        <div className="col-md-6 align-items-center text-left" >
+                            <strong>Modified Results: </strong>
+                        </div>
+                        <div className="col-md-6 align-items-center text-right pr-0" >
+                            <button 
+                                className="btn"
+                                onClick={() => this.modifiedContainerRef.current.style.display ="none" }
+                            >
+                                <Icon icon={faTimes} />
+                            </button>
+                        </div>
+                    </div>
+                    <div 
+                        className="text-muted col-lg-12 p-3"
+                        ref={this.modifiedResultsRef}
+                    >
                     </div>
                 </div>
 
@@ -142,8 +138,8 @@ class Content extends Component {
 
 // ----
 // Map State To Props
-function mapStateToProps({ inputValue }) {
-    return { inputValue };
+function mapStateToProps({ modified }) {
+    return { modified };
 }
 
 

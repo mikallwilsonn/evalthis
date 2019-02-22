@@ -87,6 +87,11 @@ html, body { background-color: #fafafa }
     opacity:1;
 }
 
+#modified_results {
+    margin-top:75px !important;
+    transition:0.5s;
+}
+
 
 /* ----
 ----------- Results

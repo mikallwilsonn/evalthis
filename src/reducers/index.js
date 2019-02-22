@@ -7,5 +7,5 @@ import modifyReducer from './modifyReducer';
 
 export default combineReducers({
     results: resultsReducer,
-    inputValue: modifyReducer
+    modified: modifyReducer
 });
