@@ -14,7 +14,7 @@ class Footer extends Component {
                         @ 2019 eval(this)
                     </div>
                     <div className="col-auto text-muted">
-                        Created by <a href="https://github.com/mikallwilsonn/" target="_blank" rel="noopener noreferrer">@mikallwilsonn</a>
+                        Created by <a href="https://github.com/mikallwilsonn/" target="_blank" rel="noopener noreferrer">Michael R. Wilson</a>
                     </div>
                 </div>
             </footer>
